@@ -10,7 +10,6 @@ public class CharacterMove : MonoBehaviour
     Rigidbody body;
     float horizontal;
     float vertical;
-    GameObject selectedObject;
 
     // Start is called before the first frame update
     void Start()
@@ -23,33 +22,9 @@ public class CharacterMove : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            SelectObject();
-        }
-
-        if (Input.GetKeyDown(KeyCode.N) && selectedObject != null)
-        {
-            selectedObject.transform.localScale *= 1.1f;
-        }
     }
 
-    private void SelectObject()
-    {
-        RaycastHit hitInfo = new RaycastHit();
-        bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
-        if (hit)
-        {
-            Debug.Log("Hit " + hitInfo.transform.gameObject.name);
-            selectedObject = hitInfo.transform.gameObject;
-        }
-        else
-        {
-            Debug.Log("No hit");
-            selectedObject = null;
-        }
-    }
+    
 
     private void FixedUpdate()
     {
