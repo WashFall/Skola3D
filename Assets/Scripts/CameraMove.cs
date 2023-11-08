@@ -13,6 +13,8 @@ public class CameraMove : MonoBehaviour
         float newRotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * cameraSpeed;
         float newRotationY = transform.localEulerAngles.x - Input.GetAxis("Mouse Y") * cameraSpeed;
 
+        
+
         Vector3 desiredRotation = new Vector3(newRotationY, newRotationX, 0f);
         transform.localEulerAngles = desiredRotation;
 
