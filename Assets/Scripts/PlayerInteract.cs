@@ -12,6 +12,8 @@ public class PlayerInteract : MonoBehaviour
             RaycastHit hitInfo = new RaycastHit();
             bool hit = Physics.Raycast(transform.position, transform.forward, out hitInfo, 5f);
 
+            Debug.DrawRay(transform.position, transform.forward, Color.red, 1);
+
             if(hit)
             {
                 Interactable interactable;
