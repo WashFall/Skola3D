@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    public GameObject textPanel;
+    public bool pickUp = false;
 
     // This method is called when PlayerInteract tries to interact with this object
-    public virtual void OnInteraction()
+    public virtual void OnInteraction(RaycastHit hitInfo)
     {
-        textPanel.SetActive(true);
+        Debug.Log("Normal Interact");
+    }
+
+    public virtual void OnInteraction(GameObject player, RaycastHit hitInfo)
+    {
+        Debug.Log("Interact With Player Object");
     }
 }

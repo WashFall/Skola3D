@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class CharacterMove : MonoBehaviour
 {
-    public Transform cameraTransform;
-    public float movementSpeed = 5f;
+    public float movementSpeed = 6f;
 
+    float horizontal, vertical;
     Rigidbody body;
-    float horizontal;
-    float vertical;
+    Transform cameraTransform;
+    public CameraMove cameraMove;
 
     // Start is called before the first frame update
     void Start()
     {
+        cameraTransform = Camera.main.transform;
+        cameraMove = cameraTransform.GetComponent<CameraMove>();
         body = GetComponent<Rigidbody>();
     }
 
@@ -40,9 +42,16 @@ public class CharacterMove : MonoBehaviour
 
         body.MovePosition(movement);
 
-        if(direction != Vector3.zero)
+        if (!cameraMove.firstPerson)
         {
-            transform.rotation = Quaternion.LookRotation(direction);
+            if(direction != Vector3.zero)
+            {
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), 10 * Time.fixedDeltaTime);
+            }
+        }
+        else
+        {
+            transform.rotation = Quaternion.LookRotation(cameraTransform.forward);
         }
     }
 }

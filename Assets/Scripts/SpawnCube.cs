@@ -37,7 +37,6 @@ public class SpawnCube : MonoBehaviour
         else
         {
             Instantiate(cubePrefab, position, rotation);
-            Debug.Log("Hej");
         }
     }
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6358551706387229519}
   - component: {fileID: 7450503986112241633}
   - component: {fileID: -3821480240389320746}
+  - component: {fileID: 961057755056461799}
   m_Layer: 0
   m_Name: SpawnCube
   m_TagString: Untagged
@@ -63,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0c4b85b9deaba06479fb1c742db82ab2, type: 2}
+  - {fileID: 2100000, guid: a45271069b3e3c2409bb9ab7c679872e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -133,3 +134,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &961057755056461799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9125938854111198588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e576ab6668f69ff4a80bd5e7e479336a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickUp: 0
