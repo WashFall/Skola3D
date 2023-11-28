@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
+    [HideInInspector]
     public bool pickUp = false;
 
     // This method is called when PlayerInteract tries to interact with this object

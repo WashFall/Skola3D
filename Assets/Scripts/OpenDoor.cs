@@ -2,24 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Klassen OpenDoor ärver av klassen Interactable.
 public class OpenDoor : Interactable
 {
     public bool autoClose = false;
-    public bool xDoor = false;
 
     private bool canOpen = false;
     private Transform parent;
     private Quaternion startRotation;
     private Quaternion openRotation;
 
+    // Detta är en override av metoden OnInteraction som ärvs från klassen Interactable.
     public override void OnInteraction(RaycastHit hitInfo)
     {
-        CancelInvoke(nameof(OpenTime));
-
+        CancelInvoke(nameof(OpenTime)); // Om dörren är påväg att stängas, avbryt den.
         
-        if (Vector3.Dot(hitInfo.point, transform.position) < 0)
+        // Jag kollar i vilken riktning från dörren min Raycast träffar, och avgör sedan vilket håll den ska öppnas åt.
+        Vector3 direction = (transform.position - hitInfo.point) / Vector3.Distance(transform.position, hitInfo.point);
+        float angle = Vector3.Angle(direction, transform.right);
+        
+        if (angle < 90)
         {
             openRotation = startRotation;
+            float num1 = 0.95f;
+            int num = (int)num1;
+            print(num);
             openRotation.eulerAngles += new Vector3(0, -90, 0);
         }
         else
@@ -29,6 +36,8 @@ public class OpenDoor : Interactable
         }
 
         canOpen = !canOpen;
+
+        // Om vi vill att dörren ska stängas automatiskt så kallar vi på den metoden efter 2,5 sekunder.
         if(autoClose)
             Invoke(nameof(OpenTime), 2.5f);
     }
