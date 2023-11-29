@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class LiftObjectTrigger : MonoBehaviour
 {
-    public Transform gripPoint;
+    private Transform gripPoint;
 
     private bool canCarry = false;
     private bool isCarried = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if(other.gameObject.tag == "Player")
         {
             gripPoint = other.transform.GetChild(1);
             canCarry = true;
@@ -20,7 +20,7 @@ public class LiftObjectTrigger : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.tag == "Player")
         {
             canCarry = true;
         }
@@ -28,22 +28,23 @@ public class LiftObjectTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.tag == "Player")
         {
             canCarry = false;
         }
     }
 
-    private void Update()
+    // Update is called once per frame
+    void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && canCarry)
+        if(Input.GetKeyDown(KeyCode.Q) && canCarry)
         {
-            if (!isCarried)
+            if(!isCarried)
             {
                 isCarried = true;
                 transform.position = gripPoint.position;
                 transform.rotation = gripPoint.rotation;
-                transform.parent = gripPoint.transform;
+                transform.parent = gripPoint;
                 GetComponent<Rigidbody>().isKinematic = true;
                 GetComponent<Collider>().isTrigger = true;
             }
@@ -51,10 +52,9 @@ public class LiftObjectTrigger : MonoBehaviour
             {
                 transform.parent = null;
                 GetComponent<Rigidbody>().isKinematic = false;
-                isCarried = false;
                 GetComponent<Collider>().isTrigger = false;
+                isCarried = false;
             }
         }
-       
     }
 }
